@@ -1,5 +1,8 @@
 package Leetcode_algorithms1;
 
+/**
+ * <a href="https://leetcode.com/problems/binary-search/">Binary Search #704</a>
+ */
 public class P704BinarySearch {
 
     public int search(int[] nums, int target) {
