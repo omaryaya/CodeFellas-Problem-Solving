@@ -8,40 +8,21 @@ import java.util.Arrays;
 public class P189RotateArray {
 
     public int[] rotate(int[] nums, int k) {
-        // | 5 | 6 | 7 | 1 | 2 | 3 | 4 | << expected
-        // | 3 | 4 | 5 | 6 | 7 | 1 | 2 | << actual
-        // int n = nums.length;
-        // k %= n;
-        // int[] rotated = new int[n];
-        // for (int i = 0; i < n; ++i) {
-        // rotated[((i + k) % n)] = nums[i];
-        // }
-        // return rotated;
-        int n = nums.length;
-        k %= nums.length; // 3
-        int j = 0, counter = 0;
-        int moveIn, moveOut;
-        // | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
-
-        int i = -1;
-        moveIn = nums[0]; // 4
-        while (counter < n) {
-
-            if (j == i) {
-                j = (j + 1) % n;
-                moveIn = nums[j];
-                continue;
-            }
-            j = (j + k) % n;
-            moveOut = nums[j];
-            nums[j] = moveIn;
-
-            moveIn = moveOut;
-            i = j;
-            ++counter;
-        }
-
+        k %= nums.length;
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
         return nums;
+    }
+
+    private void reverse(int[] A, int l, int r) {
+        while (l < r) {
+            int temp = A[l];
+            A[l] = A[r];
+            A[r] = temp;
+            l++;
+            r--;
+        }
     }
 
     public static void validate(int[] nums, int k, int[] expected) {
