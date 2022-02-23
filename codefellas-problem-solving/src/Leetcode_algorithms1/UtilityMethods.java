@@ -30,4 +30,18 @@ public class UtilityMethods<T> {
 
     }
 
+    public void printArr(T[] arr) {
+        for (T i : arr) {
+            System.out.print(i + ", ");
+        }
+        System.out.println();
+    }
+
+    public void printArr(int[] arr) {
+        for (int i : arr) {
+            System.out.print(i + ", ");
+        }
+        System.out.println();
+    }
+
 }

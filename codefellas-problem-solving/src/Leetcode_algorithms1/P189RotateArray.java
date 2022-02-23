@@ -8,53 +8,49 @@ import java.util.Arrays;
 public class P189RotateArray {
 
     public int[] rotate(int[] nums, int k) {
-        // | 5 | 6 | 7 | 1 | 2 | 3 | 4 | << expected
-        // | 3 | 4 | 5 | 6 | 7 | 1 | 2 | << actual
-        // int n = nums.length;
-        // k %= n;
-        // int[] rotated = new int[n];
-        // for (int i = 0; i < n; ++i) {
-        // rotated[((i + k) % n)] = nums[i];
-        // }
-        // return rotated;
         int n = nums.length;
-        k %= nums.length; // 3
-        int j = 0, counter = 0;
-        int moveIn, moveOut;
-        // | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+        k %= n;
 
-        int i = -1;
-        moveIn = nums[0]; // 4
-        while (counter < n) {
-
-            if (j == i) {
-                j = (j + 1) % n;
-                moveIn = nums[j];
-                continue;
-            }
-            j = (j + k) % n;
-            moveOut = nums[j];
-            nums[j] = moveIn;
-
-            moveIn = moveOut;
-            i = j;
-            ++counter;
-        }
+        reverse(nums, 0, n - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, n - 1);
 
         return nums;
     }
 
+    private void reverse(int[] nums, int start, int end) {
+        while (start <= end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
     public static void validate(int[] nums, int k, int[] expected) {
         P189RotateArray solution = new P189RotateArray();
+        UtilityMethods<Integer> util = new UtilityMethods<>();
         int[] actual = solution.rotate(nums, k);
 
         if (!Arrays.equals(actual, expected)) {
-            throw new RuntimeException("expected: " + expected + ", actual: " + actual);
+            System.out.print("FAILED ---- ");
+            System.out.print("Expected: ");
+            util.printArr(expected);
+
+            System.out.print("FAILED ------ Actual: ");
+            util.printArr(actual);
+        } else {
+            System.out.println("PASSED");
         }
-        System.out.println("PASSED");
     }
 
     public static void main(String[] args) {
+
+        int[] nums0 = { 1, 2, 3, 4 };
+        int k0 = 2;
+        int[] answer0 = { 3, 4, 1, 2 };
+        validate(nums0, k0, answer0);
 
         int[] nums = { 1, 2, 3, 4, 5, 6, 7 };
         int k = 3;
@@ -81,17 +77,16 @@ public class P189RotateArray {
         int[] answer4 = { 7, 1, 2, 3, 4, 5, 6 };
         validate(nums4, k4, answer4);
 
-        // int[] nums4 = { -1, 0 };
-        // int[] answer4 = { 0, 1 };
-        // validate(nums4, k, answer4);
+        int[] nums5 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        int k5 = 3;
+        int[] answer5 = { 7, 8, 9, 1, 2, 3, 4, 5, 6 };
+        validate(nums5, k5, answer5);
 
-        // int[] nums5 = { 1 };
-        // int[] answer5 = { 1 };
-        // validate(nums5, k, answer5);
+        int[] nums6 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        int k6 = 6;
+        int[] answer6 = { 4, 5, 6, 7, 8, 9, 1, 2, 3 };
+        validate(nums6, k6, answer6);
 
-        // int[] nums6 = { -3, -2, -1, 0, 0, 0, 0, 0, 0, 1 };
-        // int[] answer6 = { 0, 0, 0, 0, 0, 0, 1, 1, 4, 9 };
-        // validate(nums6, k, answer6);
     }
 
 }
