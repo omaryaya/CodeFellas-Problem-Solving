@@ -8,23 +8,20 @@ import java.util.Arrays;
 public class P189RotateArray {
 
     public int[] rotate(int[] nums, int k) {
-        int n = nums.length;
-        k %= n;
-
-        reverse(nums, 0, n - 1);
+        k %= nums.length;
+        reverse(nums, 0, nums.length - 1);
         reverse(nums, 0, k - 1);
-        reverse(nums, k, n - 1);
-
+        reverse(nums, k, nums.length - 1);
         return nums;
     }
 
-    private void reverse(int[] nums, int start, int end) {
-        while (start <= end) {
-            int temp = nums[start];
-            nums[start] = nums[end];
-            nums[end] = temp;
-            start++;
-            end--;
+    private void reverse(int[] A, int l, int r) {
+        while (l < r) {
+            int temp = A[l];
+            A[l] = A[r];
+            A[r] = temp;
+            l++;
+            r--;
         }
     }
 
