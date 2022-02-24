@@ -1,4 +1,4 @@
-package HashCode22;
+package HashCode22.practice_problem;
 
 import java.io.File;
 import java.io.FileInputStream;

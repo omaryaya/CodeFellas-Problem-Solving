@@ -3,6 +3,8 @@ package HashCode20;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import HashCode22.qualification_problem.input_data.IO;
+
 public class Solution {
 
     public static void main(String[] args) {
